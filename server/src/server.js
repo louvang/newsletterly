@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const routes = require('./routes');
 
 if (process.env.NODE_ENV === 'production') {
   require('dotenv').config({
@@ -18,9 +19,9 @@ mongoose
   .then(() => console.log('Connected to Mongoose!'))
   .catch((err) => console.error(err));
 
-app.get('/', (req, res) => {
-  res.send('Hello world');
-});
+app.use(express.json());
+app.use(express.urlencoded());
+app.use('/', routes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
