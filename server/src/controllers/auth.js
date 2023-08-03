@@ -38,6 +38,14 @@ exports.loginUser = (req, res, next) => {
   })(req, res, next);
 };
 
+exports.getCurrUser = (req, res) => {
+  if (req.user) {
+    res.send({ name: req.user.name });
+  } else {
+    res.send(null);
+  }
+};
+
 exports.logoutUser = (req, res) => {
   req.logout(function (err) {
     if (err) {
