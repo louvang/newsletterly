@@ -1,6 +1,23 @@
 import { Link } from 'react-router-dom';
+import { useFetchCurrUserQuery } from '../../store/apis/authApi';
 
 function Homepage() {
+  const { data } = useFetchCurrUserQuery();
+
+  let authRow = (
+    <p>
+      <Link to="/login">Login</Link> || <Link to="/register">Register</Link>
+    </p>
+  );
+
+  if (data) {
+    authRow = (
+      <p>
+        You're logged in as {data.name}! <Link to="/logout">Logout</Link>
+      </p>
+    );
+  }
+
   return (
     <div className="Homepage">
       <h1>Welcome to Newsletterly</h1>
@@ -12,9 +29,7 @@ function Homepage() {
         service that allows custom HTML templates.
       </p>
 
-      <p>
-        <Link to="login">Login</Link> || <Link to="register">Register</Link>
-      </p>
+      {authRow}
     </div>
   );
 }
