@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useFetchCurrUserQuery } from '../../store/apis/authApi';
+import axios from 'axios';
 
 function Homepage() {
   const { data } = useFetchCurrUserQuery();
@@ -11,9 +12,20 @@ function Homepage() {
   );
 
   if (data) {
+    const logout = () => {
+      axios({
+        method: 'GET',
+        widthCredentials: true,
+        url: '/api/logout',
+      }).then((res) => {
+        window.location = '/login';
+      });
+    };
+
     authRow = (
       <p>
-        You're logged in as {data.name}! <Link to="/logout">Logout</Link>
+        You're logged in as {data.name}!{' '}
+        <button onClick={logout}>Logout</button>
       </p>
     );
   }

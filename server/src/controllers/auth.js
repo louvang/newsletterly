@@ -51,6 +51,7 @@ exports.logoutUser = (req, res) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/');
+
+    res.send({ userLoggedOut: true, msg: 'User logged out.' });
   });
 };

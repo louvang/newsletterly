@@ -10,7 +10,7 @@ const authRouter = Router();
 
 authRouter.post('/api/register', registerUser);
 authRouter.post('/api/login', loginUser);
-authRouter.post('/api/logout', logoutUser);
+authRouter.get('/api/logout', logoutUser);
 authRouter.get('/api/user', getCurrUser);
 
 module.exports = authRouter;
